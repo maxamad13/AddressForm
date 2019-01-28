@@ -1,0 +1,87 @@
+
+<div class="container">
+  <h1 class="h1 text-center"> Address Form</h1>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value);">
+        <fieldset class="form-group">
+          <label for="">Street 1</label>
+          <input
+            class="form-control"
+            name="street1"
+            [(ngModel)]="address.street1"
+            required
+            #street1Ref="ngModel"
+            type="text">
+          <span *ngIf="!street1Ref.valid && street1Ref.touched" class="help-block">Please enter Street 1.</span>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="">Street 2</label>
+          <input
+            class="form-control"
+            name="street2"
+            [(ngModel)]="address.street2"
+            type="text">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="">City</label>
+          <input
+            class="form-control"
+            name="city"
+            required
+            #cityRef="ngModel"
+            [(ngModel)]="address.city"
+            type="text">
+          <span *ngIf="!cityRef.valid && cityRef.touched" class="help-block">Please enter city.</span>
+
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="">Zip Code</label>
+          <input
+            class="form-control"
+            name="address.zipcode"
+            required
+            #zipcodeRef="ngModel"
+            [(ngModel)]="address.zipcode"
+            type="number">
+          <span *ngIf="!zipcodeRef.valid && zipcodeRef.touched" class="help-block">Please enter zipcode.</span>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="">State</label>
+            <input
+              class="form-control"
+              name="state"
+              #stateRef="ngModel"
+              required
+              [(ngModel)]="address.state"
+              type="text">
+            <span *ngIf="!stateRef.valid && stateRef.touched" class="help-block">Please enter state.</span>
+          </fieldset>
+          <fieldset class="form-group">
+            <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">Save</button>
+          </fieldset>
+      </form>
+</div>
+
+<div class="container" *ngIf="submitted">
+ <table class="table">
+   <thead>
+     <tr>
+       <th>Street 1</th>
+       <th>Street 2</th>
+       <th>City</th>
+       <th>Zip Code</th>
+       <th>State</th>
+       <th>Actions</th>
+     </tr>
+   </thead>
+   <tr *ngFor="let address of addresses">
+     <td>{{address.street1}}</td>
+     <td>{{address.street2}}</td>
+     <td>{{address.city}}</td>
+     <td>{{address.zipcode}}</td>
+     <td>{{address.state}}</td>
+     <td>
+       <button class="btn btn-danger" (click)="delete(address)">Delete</button>
+     </td>
+   </tr>
+ </table>
+</div>
